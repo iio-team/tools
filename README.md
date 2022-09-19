@@ -20,26 +20,65 @@ The preparation of an edition of the IIOT should follow the following workflow.
 
 ## Task format description
 
+### Main folder
+
+The main folder only contains the single file `task.yaml`, with general setup information about the task. Some entries are meant to be updated:
+
+- `title`, with a meaningful long title
+- `syllabuslevel`, with the actual [syllabus level](https://squadre.olinfo.it/resources/syllabus.pdf) from 1 to 5
+- `memory_limit`, with the wanted memory limit
+- `time_limit`, with the wanted time limit
+ 
+ The other entries are unlikely to be modified.
+ 
+ ### `att` folder
+ 
+This folder contains files that the contestants can download while browsing the task on CMS. By default those include templates in various languages, and sample input/outputs.
+
+### `cor` folder
+
+This folder contains a single source file of a checker, that attributes a score (from 0 to 1) to a test output, knowing the test input and the correct test output. Many tasks do not need a checker, as plain white-diff scoring is sufficient: in that case, the folder can be fully omitted. For the remaining tasks, the skeleton includes a general-purpose checker with safe read operations that can be modified to fit various needs. 
+
+### `gen` folder
+
+This folder contains the input generation data, split into few files:
+- `limiti.py` with a description of the limits of the various subtasks;
+- `valida.py` with a script that double-checks whether an input is valid;
+- `generatore.py` which generates inputs given some command-line parameters;
+- `GEN` which lists the set of parameters to be fed to the generator for each subtask, together with some auxiliary information (subtask score and name).
+
+### `sol` folder
+
+This folder contain the full, partial, and wrong solutions that should be checked for correctness. File `soluzione.cpp` is used to generate the official output. A Python solution should also be included, in order to know how many points can be scored in Python. Templates are symlinked from the `att` folder, and should produce wrong answers (without crashing). Further solutions, for subtasks or other reasons, can be added here.
+
+### `testo` folder
+
+This folder contains the task statement. The statement is compiled from a (patched) LaTex source `english.tex`, which is provided in the skeleton. The statement is compiled to `english.pdf` by default by task maker, while it tests solutions. You can also build only the statement through command:
+```
+task-maker-tools booklet
+```
+Pictures to be included in the statement should be added here. Beware that in order to enable booklet compilation, pictures should have unique names **across different tasks in a same contest**. It is therefore suggested to name pictures taking inspiration from the task name.  
+
 ## Tool list
 
 <details>
 <summary>`new_contest.sh`</summary>
 
-More help.
+Creates a contest main folder. Requires to specify the round number, the year, and the start and stop of the contest. If the stop date is omitted, the contest is assumed to stop at the same start date.
 
 </details>
 
 <details>
 <summary>`new_task.sh`</summary>
 
-More help.
+Creates a task skeleton, given its name.
 
 </details>
 
 <details>
 <summary>`new_year.sh`</summary>
 
-More help.
+Creates an edition repository, given the year.
 
 </details>
 
