@@ -10,13 +10,13 @@ All tools should be used in a unix bash: either Linux, MacOS, or WSL under Windo
 
 The preparation of an edition of the IIOT should follow the following workflow.
 
-1. Create a new repository for the edition, through tool `new_year.sh` (requires `gh` installed)
+1. Create a new repository for the edition, through tool `new_year.sh` (requires `gh` installed).
 1. In this repository, create contests skeletons as they occur through tool `new_contest.sh`
 1. In a contest folder, create task skeletons through tool `new_task.sh`
 1. Edit the skeleton task until it matches the intended task. The `cor/` folder may be erased, if plain white-diff comparison is sufficient for scoring; the other folders are mandatory. You can find a description of the task format [here](https://github.com/iio-team/tools#task-format-description).
 1. As you prepare the task, you can test the solutions (including partial and wrong ones) through task maker, running command `task-maker-rust`
-1. Once the task is ready, and all solutions are correctly scored, you can run `task-maker-tools add-solution-checks -i` to store the result 
-1. Every time a push is being made to the main branch, GitHub should update a CMS instance running all tasks in the edition 
+1. Once the task is ready, and all solutions are correctly scored, you can run `task-maker-tools add-solution-checks -i` to store the result.
+1. Every time a push is being made to the main branch, GitHub should update a CMS instance running all tasks in the edition (work in progress).
 
 ## Task format description
 
@@ -62,28 +62,28 @@ Pictures to be included in the statement should be added here. Beware that in or
 ## Tool list
 
 <details>
-<summary>`new_contest.sh`</summary>
+<summary>new_contest.sh</summary>
 
 Creates a contest main folder. Requires to specify the round number, the year, and the start and stop of the contest. If the stop date is omitted, the contest is assumed to stop at the same start date.
 
 </details>
 
 <details>
-<summary>`new_task.sh`</summary>
+<summary>new_task.sh</summary>
 
 Creates a task skeleton, given its name.
 
 </details>
 
 <details>
-<summary>`new_year.sh`</summary>
+<summary>new_year.sh</summary>
 
 Creates an edition repository, given the year.
 
 </details>
 
 <details>
-<summary>`update_tools.sh`</summary>
+<summary>update_tools.sh</summary>
 
 If run in an edition repository, it updates the tools folder to the latest version.
 
