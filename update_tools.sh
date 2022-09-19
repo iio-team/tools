@@ -10,8 +10,8 @@ if ! [[ "`basename $PWD`" =~ ^iiot-202[0-9]$ ]]; then
 fi
 
 git submodule init
-git submodule update
 cd tools
+git checkout main
 git pull
 cd ..
 git add tools
