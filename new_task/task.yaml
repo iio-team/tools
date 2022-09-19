@@ -1,0 +1,16 @@
+# General info
+name: nome
+title: Problem Nome
+syllabuslevel: 3
+
+# Technical info
+memory_limit: 256
+time_limit: 1.0
+infile: ""
+outfile: ""
+
+# Other stuff
+score_mode: max_subtask
+token_mode: disabled
+public_testcases: all
+feedback_level: full
