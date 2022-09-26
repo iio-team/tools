@@ -1,4 +1,4 @@
-#!/usr/bin/env pypy3
+#!/usr/bin/env python3
 
 from limiti import *
 from sys import argv, exit, stderr
@@ -6,7 +6,7 @@ import os
 from random import random, randint, choice, sample, shuffle, seed
 from inspect import signature
 
-usage = """Generator for "nome".
+usage = """Generator for "__TASK_NAME__".
 
 Parameters:
 * N (array length)
@@ -16,12 +16,15 @@ Parameters:
 Constraint:
 * 1 <= N <= %d
 * 0 <= V <= %d
-""" % (MAXN,MAXV)
+""" % (
+    MAXN,
+    MAXV,
+)
 
 
-def run(N,V):
-    for row in reversed(usage.split('\n')[:-1]):
-        if row[0] != '*':
+def run(N, V):
+    for row in reversed(usage.split("\n")[:-1]):
+        if row[0] != "*":
             break
         assert eval(row[2:]), row[2:]
 

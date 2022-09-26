@@ -1,6 +1,6 @@
 # General info
-name: nome
-title: Problem Nome
+name: __TASK_NAME__
+title: __TASK_TITLE__
 syllabuslevel: 3
 
 # Technical info
