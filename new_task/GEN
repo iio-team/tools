@@ -1,10 +1,10 @@
 # N     V       S
 
-# Subtask 1: Esempi
+# Subtask 1: Examples
 #ST: 0
 #STNAME: examples
-#COPY: testo/nome.input0.txt
-#COPY: testo/nome.input1.txt
+#COPY: statement/__TASK_NAME__.input0.txt
+#COPY: statement/__TASK_NAME__.input1.txt
 
 # Subtask 2: N <= 100, V<=100
 #ST: 30

@@ -1,3 +1,4 @@
+# A team for each country.
 teams:
 - code: ABW
   name: "Aruba"
@@ -498,6 +499,7 @@ teams:
 - code: ZWE
   name: "Zimbabwe"
 
+# CMS doesn't import unused teams, so we add a hidden user for each country.
 users:
 - team: ABW
   username: ABW

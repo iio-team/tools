@@ -4,7 +4,7 @@ import java.util.*;
 import java.io.*;
 import java.lang.*;
 
-public class nome {
+public class __TASK_NAME__ {
     public static void main(String[] args) throws FileNotFoundException, IOException {
         InputStream fin = System.in;
         OutputStream fout = System.out;

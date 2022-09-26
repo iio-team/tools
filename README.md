@@ -1,6 +1,6 @@
 # Task Development Tools for the IIOT
 
-This repository contains a selection of task development tools, to be used for the preparation of the rounds of the IIOT. 
+This repository contains a selection of task development tools, to be used for the preparation of the rounds of the IIOT.
 
 ## Setup
 
@@ -28,23 +28,23 @@ The main folder only contains the single file `task.yaml`, with general setup in
 - `syllabuslevel`, with the actual [syllabus level](https://squadre.olinfo.it/resources/syllabus.pdf) from 1 to 5
 - `memory_limit`, with the wanted memory limit
 - `time_limit`, with the wanted time limit
- 
+
  The other entries are unlikely to be modified.
- 
+
  ### `att` folder
- 
+
 This folder contains files that the contestants can download while browsing the task on CMS. By default those include templates in various languages, and sample input/outputs.
 
-### `cor` folder
+### `check` folder
 
-This folder contains a single source file of a checker, that attributes a score (from 0 to 1) to a test output, knowing the test input and the correct test output. Many tasks do not need a checker, as plain white-diff scoring is sufficient: in that case, the folder can be fully omitted. For the remaining tasks, the skeleton includes a general-purpose checker with safe read operations that can be modified to fit various needs. 
+This folder contains a single source file of a checker, that attributes a score (from 0 to 1) to a test output, knowing the test input and the correct test output. Many tasks do not need a checker, as plain white-diff scoring is sufficient: in that case, the folder can be fully omitted. For the remaining tasks, the skeleton includes a general-purpose checker with safe read operations that can be modified to fit various needs.
 
 ### `gen` folder
 
 This folder contains the input generation data, split into few files:
 - `limiti.py` with a description of the limits of the various subtasks;
-- `valida.py` with a script that double-checks whether an input is valid;
-- `generatore.py` which generates inputs given some command-line parameters;
+- `validator.py` with a script that double-checks whether an input is valid;
+- `generator.py` which generates inputs given some command-line parameters;
 - `GEN` which lists the set of parameters to be fed to the generator for each subtask, together with some auxiliary information (subtask score and name).
 
 ### `sol` folder
@@ -57,14 +57,14 @@ This folder contains the task statement. The statement is compiled from a (patch
 ```
 task-maker-tools booklet
 ```
-Pictures to be included in the statement should be added here. Beware that in order to enable booklet compilation, pictures should have unique names **across different tasks in a same contest**. It is therefore suggested to name pictures taking inspiration from the task name.  
+Pictures to be included in the statement should be added here. Beware that in order to enable booklet compilation, pictures should have unique names **across different tasks in a same contest**. It is therefore suggested to name pictures taking inspiration from the task name.
 
 ## Tool list
 
 <details>
-<summary>new_contest.sh</summary>
+<summary>new_contest.py</summary>
 
-Creates a contest main folder. Requires to specify the round number, the year, and the start and stop of the contest. If the stop date is omitted, the contest is assumed to stop at the same start date.
+Creates a contest main folder. Requires to specify the round number, the year, the start and duration of the contest.
 
 </details>
 
