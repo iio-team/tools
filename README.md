@@ -13,7 +13,7 @@ The preparation of an edition of the IIOT should follow the following workflow.
 1. Create a new repository for the edition, through tool `new_year.sh` (requires `gh` installed).
 1. In this repository, create contests skeletons as they occur through tool `new_contest.sh`
 1. In a contest folder, create task skeletons through tool `new_task.sh`
-1. Edit the skeleton task until it matches the intended task. The `cor/` folder may be erased, if plain white-diff comparison is sufficient for scoring; the other folders are mandatory. You can find a description of the task format [here](https://github.com/iio-team/tools#task-format-description).
+1. Edit the skeleton task until it matches the intended task. The `check/` folder may be erased, if plain white-diff comparison is sufficient for scoring; the other folders are mandatory. You can find a description of the task format [here](https://github.com/iio-team/tools#task-format-description).
 1. As you prepare the task, you can test the solutions (including partial and wrong ones) through task maker, running command `task-maker-rust`
 1. Once the task is ready, and all solutions are correctly scored, you can run `task-maker-tools add-solution-checks -i` to store the result.
 1. Every time a push is being made to the main branch, GitHub should update a CMS instance running all tasks in the edition (work in progress).
@@ -49,9 +49,9 @@ This folder contains the input generation data, split into few files:
 
 ### `sol` folder
 
-This folder contain the full, partial, and wrong solutions that should be checked for correctness. File `soluzione.cpp` is used to generate the official output. A Python solution should also be included, in order to know how many points can be scored in Python. Templates are symlinked from the `att` folder, and should produce wrong answers (without crashing). Further solutions, for subtasks or other reasons, can be added here.
+This folder contain the full, partial, and wrong solutions that should be checked for correctness. File `solution.cpp` is used to generate the official output. A Python solution should also be included, in order to know how many points can be scored in Python. Templates are symlinked from the `att` folder, and should produce wrong answers (without crashing). Further solutions, for subtasks or other reasons, can be added here.
 
-### `testo` folder
+### `statement` folder
 
 This folder contains the task statement. The statement is compiled from a (patched) LaTex source `english.tex`, which is provided in the skeleton. The statement is compiled to `english.pdf` by default by task maker, while it tests solutions. You can also build only the statement through command:
 ```
