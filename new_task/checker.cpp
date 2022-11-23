@@ -10,24 +10,24 @@
 using namespace std;
 
 enum result_t {
-    UNEXPECTED, // correct output is incoherent
-    EXCELLENT,  // better than optimal
-    SUCCESS,    // exactly optimal
-    PARTIAL,    // worse than optimal but coherent
-    WRONG,      // correct output format, incorrect logic
-    MALFORMED   // incorrect output format
+  UNEXPECTED,  // correct output is incoherent
+  EXCELLENT,   // better than optimal
+  SUCCESS,     // exactly optimal
+  PARTIAL,     // worse than optimal but coherent
+  WRONG,       // correct output format, incorrect logic
+  MALFORMED    // incorrect output format
 };
 
-const vector<string> MSG = {
-    "Reference output is wrong",
-    "Output is extraordinary",
-    "translate:success",
-    "translate:partial",
-    "translate:wrong",
-    "Output is malformed"
+const string MSG[] = {
+  "Reference output is wrong",
+  "Output is extraordinary",
+  "translate:success",
+  "translate:partial",
+  "translate:wrong",
+  "Output is malformed"
 };
 
-const vector<float> VAL = {-1, 1.1, 1.0, -1, 0.0, 0.0};
+const float VAL[] = {-1, 1.1, 1.0, -1, 0.0, 0.0};
 
 bool reading_corr = true;
 
@@ -53,18 +53,18 @@ void ex(result_t result, string extra = "") {
   ex(VAL[result], MSG[result] + (extra == "" ? "" : " (" + extra + ")"));
 }
 
-template <typename T> inline void read(ifstream &s, T &x) {
+template <typename T> void read(ifstream &s, T &x) {
   if (!(s >> x))
     ex(MALFORMED);
 }
 
 template <typename T1, typename T2, typename... Ts>
-inline void read(ifstream &s, T1 &x1, T2 &x2, Ts &...xs) {
+void read(ifstream &s, T1 &x1, T2 &x2, Ts &...xs) {
   read(s, x1);
   read(s, x2, xs...);
 }
 
-template <typename T = int> inline T read(ifstream &s) {
+template <typename T = int> T read(ifstream &s) {
   T x;
   read(s, x);
   return x;
@@ -91,14 +91,14 @@ vector<int> V;
 
 // read output, check and get numeric value for scoring
 long long read_output(ifstream &s) {
-    // replace the output checking logic
-    int C;
-    read(s, C);
-    limit(1, C, 100);
-    if (C == 3)
-        ex(WRONG);
-    close(s);
-    return C;
+  // replace the output checking logic
+  int C;
+  read(s, C);
+  limit(1, C, 100);
+  if (C == 3)
+    ex(WRONG);
+  close(s);
+  return C;
 }
 
 int main(int argc, char const *argv[]) {
@@ -106,15 +106,15 @@ int main(int argc, char const *argv[]) {
     cerr << "usage: ./checker <input> <correct> <user>" << endl;
     return 0;
   }
-  ifstream cin(argv[1]);
+  ifstream in(argv[1]);
   ifstream corr(argv[2]);
   ifstream user(argv[3]);
 
   // copy-paste the C++ template logic here
-    cin >> N;
-    V.resize(N);
-    for (int i=0; i<N; i++)
-        cin >> V[i];
+  in >> N;
+  V.resize(N);
+  for (int i = 0; i < N; i++)
+    in >> V[i];
   // --------------------------------------
 
   long long Scorr = read_output(corr);
@@ -124,9 +124,10 @@ int main(int argc, char const *argv[]) {
   if (Suser > Scorr) {
     ex(EXCELLENT, string("Suser=") + to_string(Suser) + " Scorr=" + to_string(Scorr));
   }
-  if (Suser == Scorr) ex(SUCCESS);
+  if (Suser == Scorr)
+    ex(SUCCESS);
 
-    // replace the scoring logic
+  // replace the scoring logic
   double factor = Suser * 1.0 / Scorr;
   ex(factor);
   return 0;

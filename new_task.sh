@@ -7,7 +7,7 @@ fi
 
 name=$1
 folder=`realpath "${0%.sh}"`
-fname=`basename $0 .sh`
+fname=`basename "$0" .sh`
 
 echo "This script will create a new empty task of name \"$name\" into the current folder."
 if [ ! -f contest.yaml ]; then
@@ -17,21 +17,21 @@ fi
 echo "Press enter to proceed, CTRL-C to quit..."
 read x
 
-up=`echo ${name:0:1} | tr 'a-z' 'A-Z'`"${name:1}"
+up="`echo "${name:0:1}" | tr '[:lower:]' '[:upper:]'`${name:1}"
 mkdir "$name"
 mkdir "$name/att"
 mkdir "$name/check"
 mkdir "$name/gen"
 mkdir "$name/sol"
 mkdir "$name/statement"
-cat "$folder"/task.yaml | sed "s/__TASK_NAME__/$name/g;s/__TASK_TITLE__/Problem $up/g" > "$name/task.yaml"
-cat "$folder"/t.c | grep -v "brief" > "$name/att/$name.c"
-cat "$folder"/t.cpp | grep -v "brief" > "$name/att/$name.cpp"
-cat "$folder"/t.cpp | grep -v "NOTE" > "$name/sol/soluzione.cpp"
-cat "$folder"/t.java | sed "s/__TASK_NAME__/$name/g" > "$name/att/$name.java"
-cat "$folder"/t.pas > "$name/att/$name.pas"
-cat "$folder"/t.py | grep -v "brief" > "$name/att/$name.py"
-cat "$folder"/t.py | grep -v "NOTE" > "$name/sol/soluzione_py.py"
+sed "s/__TASK_NAME__/$name/g;s/__TASK_TITLE__/Problem $up/g" "$folder/task.yaml" > "$name/task.yaml"
+grep -v "brief" "$folder/t.c" > "$name/att/$name.c"
+grep -v "brief" "$folder/t.cpp" > "$name/att/$name.cpp"
+grep -v "NOTE" "$folder/t.cpp" > "$name/sol/soluzione.cpp"
+sed "s/__TASK_NAME__/$name/g" "$folder/t.java" > "$name/att/$name.java"
+cat "$folder/t.pas" > "$name/att/$name.pas"
+grep -v "brief" "$folder/t.py" > "$name/att/$name.py"
+grep -v "NOTE" "$folder/t.py" > "$name/sol/soluzione_py.py"
 ln -s "../att/$name.c" "$name/sol/template_c.c"
 ln -s "../att/$name.cpp" "$name/sol/template_cpp.cpp"
 ln -s "../att/$name.py" "$name/sol/template_py.py"
@@ -39,7 +39,7 @@ ln -s "../statement/$name.input0.txt" "$name/att/input0.txt"
 ln -s "../statement/$name.input1.txt" "$name/att/input1.txt"
 ln -s "../statement/$name.output0.txt" "$name/att/output0.txt"
 ln -s "../statement/$name.output1.txt" "$name/att/output1.txt"
-cat "$folder"/english.tex | sed "s/__TASK_NAME__/$name/g" > "$name/statement/english.tex"
+sed "s/__TASK_NAME__/$name/g" "$folder/english.tex" > "$name/statement/english.tex"
 touch "$name/statement/english.pdf"
 cat <<EOF > "$name/statement/$name.input0.txt"
 1
@@ -52,13 +52,11 @@ EOF
 echo 42 > "$name/statement/$name.output0.txt"
 echo 42 > "$name/statement/$name.output1.txt"
 ln -s "english.pdf" "$name/statement/statement.pdf"
-ln -s ../../../tools/$fname/logo.pdf "$name/statement/logo.pdf"
-cat "$folder"/generator.py | sed "s/__TASK_NAME__/$name/g" > "$name/gen/generator.py"
-cat "$folder"/GEN | sed "s/__TASK_NAME__/$name/g" > "$name/gen/GEN"
-cp "$folder"/{limiti.py,validator.py} "$name/gen/"
-cp "$folder"/checker.cpp "$name/check/"
+ln -s "../../../tools/$fname/logo.pdf" "$name/statement/logo.pdf"
+sed "s/__TASK_NAME__/$name/g" "$folder/generator.py" > "$name/gen/generator.py"
+sed "s/__TASK_NAME__/$name/g" "$folder/GEN" > "$name/gen/GEN"
+cp "$folder/{limiti.py,validator.py}" "$name/gen/"
+cp "$folder/checker.cpp" "$name/check/"
 chmod a+x "$name/gen/generator.py"
 
-mv contest.yaml __temp__
-cat __temp__ | sed "s/^tasks:$/tasks:\n- $name/" > contest.yaml
-rm __temp__
+sed "s/^tasks:$/tasks:\n- $name/" -i contest.yaml
