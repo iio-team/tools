@@ -13,6 +13,8 @@ def day_suffix(day: int):
         return "st"
     if day in (2, 22):
         return "nd"
+    if day in (3, 23):
+        return "rd"
     return "th"
 
 

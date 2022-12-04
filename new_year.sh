@@ -1,4 +1,5 @@
 #!/bin/bash
+set -e
 
 if [ "$1" == "" ]; then
     echo "usage: $(basename "$0") year"
@@ -14,13 +15,13 @@ if git rev-parse --is-inside-work-tree 1>/dev/null 2>/dev/null; then
     exit 1
 fi
 echo "Press enter to proceed, CTRL-C to quit..."
-read x
+read
 
 gh auth login
-gh repo create iio-team/iiot-$year --private --team everyone --clone
-cd iiot-$year
+gh repo create "iio-team/iiot-$year" --private --team everyone --clone
+cd "iiot-$year"
 git branch -M main
-cat "$folder/README.md" | sed "s|YYYY|$year|" > README.md
+sed "s|YYYY|$year|" "$folder/README.md" > README.md
 cp -r "$folder/.gitignore" "$folder/.github" .
 git add .
 git commit -m "initial commit"
