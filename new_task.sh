@@ -55,7 +55,7 @@ ln -s "english.pdf" "$name/statement/statement.pdf"
 ln -s "../../../tools/$fname/logo.pdf" "$name/statement/logo.pdf"
 sed "s/__TASK_NAME__/$name/g" "$folder/generator.py" > "$name/gen/generator.py"
 sed "s/__TASK_NAME__/$name/g" "$folder/GEN" > "$name/gen/GEN"
-cp "$folder/{limiti.py,validator.py}" "$name/gen/"
+cp "$folder"/{limiti.py,validator.py} "$name/gen/"
 cp "$folder/checker.cpp" "$name/check/"
 chmod a+x "$name/gen/generator.py"
 
