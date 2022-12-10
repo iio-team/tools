@@ -27,9 +27,8 @@ for f in $(find ./); do
         echo "renaming class of $f"
         sed -i "s/class $1/class $2/" $f
     fi
-
     # fix symlinks
-    if [[ -L $file ]];then
+    if [[ -L "$f" ]];then
         echo "fixing symlink $f"
         old_path=$(readlink $f)
         new_path="${old_path//$1/$2}"
