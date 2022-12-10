@@ -47,9 +47,18 @@ for f in $(find ./); do
 done
 
 # replace in task.yaml
-echo "fixing task.yaml and GEN and renaming current directory"
+echo "fixing task.yaml and GEN"
 sed -i "s/name: $1/name: $2/" task.yaml
-
 sed -i "s/$1.input/$2.input/" gen/GEN
+
+# fix contest.yaml
+echo "fixing contest.yaml"
+if [ -f ../contest.yaml ]; then
+    sed -i "s/^- $1$/- $2/" ../contest.yaml
+else
+    echo "contest.yaml not found."
+fi
+
 #rename current directory
+echo "renaming directory"
 mv ../{$1,$2}
