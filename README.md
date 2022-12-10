@@ -88,3 +88,8 @@ Creates an edition repository, given the year.
 If run in an edition repository, it updates the tools folder to the latest version.
 
 </details>
+<summary>rename_task.sh</summary>
+
+If run in an task repository, given its current name and a new one, it renames the task.
+
+</details>
