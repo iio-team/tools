@@ -13,17 +13,11 @@ real max_bend  = .2; // massimo bending per un arco
 real[] deg, bend;
 
 // disegno un nodo
-void node(pair pos, string txt = "", pen color, pen background, int p, int u) {
+void node(pair pos, string txt = "", pen color = black, pen background = white) {
     path c = circle(pos, node_size);
     fill(c, background);
     draw(c, black+1);
     label(scale(text_size)*txt, pos, color);
-    for (int i = 0; i <= u; ++i) {
-        string text = (i == u) ? string(p) : "\cancel{" + string(p) + "}";
-        pen c = (i == u) ? black : red;
-        label(scale(text_size/2)*text, pos+(0,-0.7)+i*(0,-0.3), c);
-        p = (int)(p / 2);
-    }
 }
 
 // disegno un arco
@@ -41,9 +35,8 @@ void edge(pair start, pair end, string txt = "", pen p = black, real deg = 0, re
     }
     if (arrow) draw(l, p, EndArrow(21*node_size));
     else draw(l, p);
-    pair center = midpoint(l) + 0.2*N;
-    label(graphic("coin.png", "height=0.2cm"), center+(-0.2,0));
-    label(scale(text_size/2)*txt, center);
+    pair center = midpoint(l) + rotate(90)*dir(l, 0.5, true)*0.3;
+    label(scale(text_size)*txt, center);
 }
 
 // interfaccia per disegnare un arco che usa parametri ottimali calcolati
@@ -123,20 +116,3 @@ void calcdeg(pair[] P, int[][] E) {
         bend[i] = (min(cw/90,1)-min(cc/90,1))*max_bend;
     }
 }
-
-
-void main(pair[] P, pen[] colV, int[][] E, int[] picarats, int[] uses) {
-    // calcolo parametri
-    for (int i=colV.length; i<P.length; ++i) colV[i] = colV[i-1];
-    calcdeg(P, E);
-    real ymax = 0;
-    for (int i=0; i<P.length; ++i) ymax = max(ymax, P[i].y);
-
-    // disegno nodi e archi
-    for (int i=0; i<P.length; ++i) {
-        node(P[i], string(i), black, 0.25*colV[i] + 0.75*white, picarats[i], uses[i]);
-    }
-    for (int i=0; i<E.length; ++i)
-        ed(P, E, i, string(E[i][2]), (E[i][3] == 1) ? red+white+1 : black+1, true);
-}
-
