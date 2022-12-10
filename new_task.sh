@@ -59,4 +59,5 @@ cp "$folder"/{limiti.py,validator.py} "$name/gen/"
 cp "$folder/checker.cpp" "$name/check/"
 chmod a+x "$name/gen/generator.py"
 
-sed "s/^tasks:$/tasks:\n- $name/" -i contest.yaml
+sed -i.bak "s/^tasks:$/tasks:\n- $name/" contest.yaml
+rm contest.yaml.bak
