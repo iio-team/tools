@@ -21,7 +21,7 @@ gh auth login
 gh repo create "iio-team/iiot-$year" --private --team everyone --clone
 cd "iiot-$year"
 git branch -M main
-sed "s|YYYY|$year|" "$folder/README.md" > README.md
+sed "s|YYYY|$year|g" "$folder/README.md" > README.md
 cp -r "$folder/.gitignore" "$folder/.github" .
 git add .
 git commit -m "initial commit"

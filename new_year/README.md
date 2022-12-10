@@ -1,8 +1,8 @@
 # IIOT YYYY - contest sources
 
-After cloning this repository, run the following command from a bash shell on Linux, MacOS or WSL:
+Clone this repository by running the following command from a bash shell on Linux, MacOS or WSL:
 ```
-git submodule init; git submodule update
+git clone --recurse-submodules git@github.com:iio-team/iiot-YYYY.git
 ```
 These commands will populate the [tools](https://github.com/iio-team/tools) subfolder with scripts simplifying the development process, with self-explanatory names. A walkthrough tutorial on how to develop contests and tasks is also available in the [README.md](https://github.com/iio-team/tools/blob/main/README.md) file therein.
 
