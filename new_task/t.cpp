@@ -14,9 +14,11 @@ int main() {
 
     int N;
     cin >> N;
+    
     vector<int> V(N);
-    for (int i = 0; i < N; i++)
+    for (int i = 0; i < N; i++) {
         cin >> V[i];
+    }
 
     // insert your code here
 

@@ -9,7 +9,7 @@
 #define MAXN 10000
 
 // input data
-int N, i;
+int N;
 int V[MAXN];
 
 int main() {
@@ -18,11 +18,13 @@ int main() {
     // freopen("output.txt", "w", stdout);
 
     assert(1 == scanf("%d", &N));
-    for (i = 0; i < N; i++)
+    for (int i = 0; i < N; i++) {
         assert(1 == scanf("%d", &V[i]));
+    }
 
     // insert your code here
 
     printf("%d\n", 42); // print the result
+    
     return 0;
 }

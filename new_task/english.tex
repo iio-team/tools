@@ -3,20 +3,26 @@
 \usepackage{pifont,mdframed}
 \usepackage[bottom]{footmisc}
 
+\newcommand{\IIOTsubtask}[3]{\OISubtask{#1}{#2}{#3}}
+\newcommand{\limit}[1]{\limiti{#1}}
+
 \makeatletter
 \gdef\this@inputfilename{input}
 \gdef\this@outputfilename{output}
 \makeatother
 
-    This is a nice task.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-    \begin{figure}[H]
-        \centering
-        \includegraphics[width=0.9\linewidth]{__TASK_NAME__.jpg}
-        \caption{This is a nice caption.}
-    \end{figure}
+This is a nice task.
 
-    This is a nice task.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.6\linewidth]{__TASK_NAME__.jpg}
+    \caption{This is a nice caption.}
+\end{figure}
+
+This is a very nice task.
 
 \begin{warning}
 Among the attachments of this task you may find a template file \texttt{__TASK_NAME__.*} with a sample incomplete implementation.
@@ -28,16 +34,18 @@ The first line contains the only integer $N$. The second line contains $N$ integ
 \OutputFile
 You need to write a single line with an integer: the unique integer that solves this task.
 
+
+% TODO: Remove this if the task don't use the modulo operation
 \begin{danger}
 The \emph{modulo} operation $(a \bmod m)$ can be written in C/C++/Python as \verb|(a % m)| and in Pascal as \verb|(a mod m)|. To avoid the \emph{integer overflow} error, remember to reduce all partial results through the modulus, and not just the final result! \\
 \emph{Notice that if $x < 10^9 + 7$, then $2 x$ fits into a} C/C++ \verb|int| \emph{and} Pascal \verb|longint|.
 \end{danger}
 
-% Assunzioni
+
 \Constraints
 \begin{itemize}[nolistsep, itemsep=2mm]
-	\item $1 \le N \le 10\,000$.
-	\item $1 \le V_i \le 100\,000$ for each $i=0\ldots N-1$.
+	\item $1 \le N \le \limit{MAX_N}$.
+	\item $1 \le V_i \le \limit{MAX_V}$ for each $i=0\ldots N-1$.
 \end{itemize}
 
 \Scoring
@@ -51,8 +59,6 @@ In order to obtain the score of a subtask, your program needs to correctly solve
 \OISubtask{50}{1}{$N \le 100$.}
 
 \OISubtask{20}{1}{No additional limitations.}
-
-% Esempi
 
 
 \Examples
