@@ -1,26 +1,30 @@
-unitsize(1cm);
 import math;
-settings.tex = "pdflatex";
-usepackage("cancel");
+unitsize(1cm);
 
-bool orientato = true; // se il grafo è orientato
+pen foreground = black; // the graph foreground color
+pen background = white; // the graph background color
+bool oriented = false; // whether the graph is oriented
 
-real node_size = .5; // dimensione nodi
-real text_size = 1.5; // dimensione label
-real max_bend  = .2; // massimo bending per un arco
+real node_size = .5; // size of nodes in cm
+real text_size = 1.5; // size of labels
+real max_bend  = .2; // maximum allowed bending for an edge
 
-// angolo dei self-loop e bending degli archi (automatico)
+// empty callbacks
+void empty_node_callback(pair,string,pen,pen) {}
+void empty_edge_callback(pair,pair,string,pen,real,real,bool) {}
+
+// angles of self-loops and edge bending (computed automatically)
 real[] deg, bend;
 
-// disegno un nodo
-void node(pair pos, string txt = "", pen color = black, pen background = white) {
+// draw a node
+void node(pair pos, string txt = "", pen foreground = foreground, pen background = background) {
     path c = circle(pos, node_size);
     fill(c, background);
-    draw(c, black+1);
-    label(scale(text_size)*txt, pos, color);
+    draw(c, foreground+1);
+    label(scale(text_size)*txt, pos, foreground);
 }
 
-// disegno un arco
+// draw an edge
 void edge(pair start, pair end, string txt = "", pen p = black, real deg = 0, real bending = 0, bool arrow = true) {
     path l;
     if (start != end) {
@@ -39,19 +43,13 @@ void edge(pair start, pair end, string txt = "", pen p = black, real deg = 0, re
     label(scale(text_size)*txt, center);
 }
 
-// interfaccia per disegnare un arco che usa parametri ottimali calcolati
-void ed(pair[] P, int[][] E, int i, string txt = "", pen p = black, bool arrow = orientato) {
+// interface for drawing an edge using computed parameters
+void ed(pair[] P, int[][] E, int i, string txt = "", pen p = foreground, bool arrow = oriented, void ec(pair,pair,string,pen,real,real,bool) = empty_edge_callback) {
     edge(P[E[i][0]], P[E[i][1]], txt, p, deg[E[i][0]], bend[i], arrow);
+    ec(P[E[i][0]], P[E[i][1]], txt, p, deg[E[i][0]], bend[i], arrow);
 }
 
-// riscala angolo in 0..360
-real clockify(real x) {
-    while (x<0)   x+=360;
-    while (x>360) x-=360;
-    return x;
-}
-
-// calcolo angoli e bending ottimali
+// calculates optimal angles and bendings for edges
 void calcdeg(pair[] P, int[][] E) {
     bool[] hasloop, isdouble;
     real[][] deglist;
@@ -80,8 +78,8 @@ void calcdeg(pair[] P, int[][] E) {
             for (int i=1; i<l.length-1; ++i)
                 if (l[i+1]-l[i] > l[imax+1]-l[imax]) imax = i;
             deg[i] = (l[imax]+l[imax+1])/2;
-            deglist[i].push(clockify(deg[i]-45));
-            deglist[i].push(clockify(deg[i]+45));
+            deglist[i].push((deg[i]-45) % 360);
+            deglist[i].push((deg[i]+45) % 360);
         }
         deglist[i] = sort(deglist[i]);
         deglist[i].push(deglist[i][0]+360);
@@ -115,4 +113,35 @@ void calcdeg(pair[] P, int[][] E) {
         if (isdouble[i]) cc = 0;
         bend[i] = (min(cw/90,1)-min(cc/90,1))*max_bend;
     }
+}
+
+void draw(
+    pair[]   node_position,
+    string[] node_text = {},
+    pen[]    node_foreground = {foreground},
+    pen[]    node_background = {background},
+    int[][]  edge_vertex,
+    string[] edge_text = {""},
+    pen[]    edge_color = {foreground},
+    bool[]   edge_oriented = {oriented},
+    void     node_callback(pair,string,pen,pen) = empty_node_callback,
+    void     edge_callback(pair,pair,string,pen,real,real,bool) = empty_edge_callback
+) {
+    int N = node_position.length;
+    for (int i=node_text.length; i<N; ++i) node_text[i] = string(i);
+    for (int i=node_foreground.length; i<N; ++i) node_foreground[i] = node_foreground[i-1];
+    for (int i=node_background.length; i<N; ++i) node_background[i] = node_background[i-1];
+
+    int M = edge_vertex.length;
+    for (int i=edge_text.length; i<M; ++i) edge_text[i] = edge_text[i-1];
+    for (int i=edge_color.length; i<M; ++i) edge_color[i] = edge_color[i-1];
+    for (int i=edge_oriented.length; i<M; ++i) edge_oriented[i] = edge_oriented[i-1];
+
+    calcdeg(node_position, edge_vertex);
+    for (int i=0; i<N; ++i)
+        node(node_position[i], node_text[i], node_foreground[i], node_background[i]);
+    for (int i=0; i<M; ++i)
+        ed(node_position, edge_vertex, i, edge_text[i], edge_color[i], edge_oriented[i], edge_callback);
+    for (int i=0; i<N; ++i)
+        node_callback(node_position[i], node_text[i], node_foreground[i], node_background[i]);
 }
