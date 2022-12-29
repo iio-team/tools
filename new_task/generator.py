@@ -29,7 +29,7 @@ def run(N, V):
         assert eval(row[2:]), row[2:]
 
     N = randint(1, N)
-    V = [randint(0, V) for _ in range(N)]
+    V = [randint(0, V) for _ in range(N)]
 
     print(N)
     print(*V)
