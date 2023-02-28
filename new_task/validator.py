@@ -15,14 +15,15 @@ def run(f, st):
     for k, v in subtasks[st].items():
         globals()[k] = v
 
-    N = int(f[0])
+    N = int(next(f))
     assert 1 <= N <= MAX_N
 
-    V = list(map(int, f[1].split()))
+    V = list(map(int, next(f).split()))
     assert len(V) == N
     
     assert all(0 <= v <= MAX_V for v in V)
 
+    assert next(f, None) is None
 
 if __name__ == "__main__":
     if len(sys.argv) < 2:
@@ -34,5 +35,5 @@ if __name__ == "__main__":
     if len(sys.argv) == 3:
         st = int(sys.argv[2])
 
-    f = open(sys.argv[1]).readlines()
+    f = open(sys.argv[1])
     run(f, st)
