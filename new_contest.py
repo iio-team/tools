@@ -36,36 +36,37 @@ def format_date_range(start: datetime.datetime, stop: datetime.datetime):
 
 
 def main(args):
-    if not os.path.exists(".git"):
-        raise RuntimeError("This script should be run from the repo root")
-
-    cwd = os.getcwd()
-    if not os.path.basename(cwd).startswith("iiot-202"):
-        raise RuntimeError("The current folder does not correspond to a IIOT year")
+    if not os.path.exists(".git") or not os.path.exists("tools/new_contest.py"):
+        raise RuntimeError("This script should be run from the IIOT repo root")
 
     start = datetime.datetime.fromisoformat(args.start)
     if not start.tzinfo:
         tz = pytz.timezone("Europe/Rome")
         start = tz.localize(start)
 
-    duration = list(map(int, args.duration.split(":")))
-    duration = (duration + [0, 0])[:3]
     duration = datetime.timedelta(
-        hours=duration[0],
-        minutes=duration[1],
-        seconds=duration[2],
+        hours=27,
+        minutes=0,
+        seconds=0,
     )
     stop = start + duration
 
-    name = f"round{args.round}"
-    description = f"IIOT{args.year} -- Round {args.round}"
+    name = f"{args.round}"
+    description = f"IIOT{args.year} -- "
+    if name[:-1] == "round":
+        description += "Round " + name[-1]
+    elif name == "interpractice":
+        description += "International Practice"
+    elif name == "international":
+        description += "International Finals"
+    else:
+        description += name.title() + " Round"
     date = format_date_range(start, stop)
 
     with open(Path(__file__).parent / "new_contest" / "countries.yaml") as f:
         countries = f.read()
 
-    contest_yaml = f"""
-name: {name}
+    contest_yaml = f"""name: {name}
 description: {description}
 date: {date}
 start: {int(start.timestamp())}
@@ -89,8 +90,7 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument(
         "round",
-        type=int,
-        help="Number of this round (1-based)",
+        help="Should be among: practice, roundN, final, interpractice, international",
     )
     parser.add_argument(
         "year",
@@ -99,10 +99,6 @@ if __name__ == "__main__":
     parser.add_argument(
         "start",
         help="Start date of the contest (ISO 8601: yyyy-mm-ddThh:mm:ss+TZ:TZ). Timezone defaults to Europe/Rome",
-    )
-    parser.add_argument(
-        "duration",
-        help="Duration (format hh or hh:mm or hh:mm:ss)",
     )
 
     main(parser.parse_args())
