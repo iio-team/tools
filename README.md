@@ -11,12 +11,23 @@ All tools should be used in a unix bash: either Linux, MacOS, or WSL under Windo
 The preparation of an edition of the IIOT should follow the following workflow.
 
 1. Create a new repository for the edition, through tool `new_year.sh` (requires `gh` installed).
-1. In this repository, create contests skeletons as they occur through tool `new_contest.sh`
+1. In this repository, create contests skeletons as they occur through tool `new_contest.py`
 1. In a contest folder, create task skeletons through tool `new_task.sh`
 1. Edit the skeleton task until it matches the intended task. The `check/` folder may be erased, if plain white-diff comparison is sufficient for scoring; the other folders are mandatory. You can find a description of the task format [here](https://github.com/iio-team/tools#task-format-description).
+1. For preparing the task, you can use `make-templates` to automatically produce templates for your tasks (see more details below)
 1. As you prepare the task, you can test the solutions (including partial and wrong ones) through task maker, running command `task-maker-rust`
 1. Once the task is ready, and all solutions are correctly scored, you can run `task-maker-tools add-solution-checks -i` to store the result.
 1. Every time a push is being made to the main branch, GitHub should update a CMS instance running all tasks in the edition (work in progress).
+
+In order to automatically produce templates, you can install a dedicated tool through:
+```
+pip install make-templates
+```
+You need to edit the file `inout.slide` in your task folder, that the `new_task.sh` script created, to match the input-output format that you want for your problem (you can find [here](https://github.com/olimpiadi-informatica/make-templates) a description of the SLIDe language if needed, but it is mostly self-explanatory). Then you just type:
+```
+make-templates
+```
+and the tool will prepare all the needed templates.
 
 ## Task format description
 

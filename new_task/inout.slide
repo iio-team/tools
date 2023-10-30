@@ -1,0 +1,8 @@
+input:
+
+int N;
+int V[N];
+
+output:
+
+int K;
