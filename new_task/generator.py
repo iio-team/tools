@@ -17,8 +17,8 @@ Constraint:
 * 1 <= N <= %d
 * 0 <= V <= %d
 """ % (
-    MAX_N,
-    MAX_V,
+    MAXN,
+    MAXV,
 )
 
 
