@@ -17,14 +17,13 @@ fi
 echo "Press enter to proceed, CTRL-C to quit..."
 read x
 
-up="`echo "${name:0:1}" | tr '[:lower:]' '[:upper:]'`${name:1}"
 mkdir "$name"
 mkdir "$name/att"
 mkdir "$name/check"
 mkdir "$name/gen"
 mkdir "$name/sol"
 mkdir "$name/statement"
-sed "s/__TASK_NAME__/$name/g;s/__TASK_TITLE__/Problem $up/g" "$folder/task.yaml" > "$name/task.yaml"
+sed "s/__TASK_NAME__/$name/g" "$folder/task.yaml" > "$name/task.yaml"
 cp "$folder/inout.slide" "$name/inout.slide"
 grep -v "brief" "$folder/t.c" > "$name/att/$name.c"
 grep -v "brief" "$folder/t.cpp" > "$name/att/$name.cpp"
