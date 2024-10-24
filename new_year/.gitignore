@@ -10,7 +10,6 @@ a.out
 input/
 output/
 io/
-tests/
 correttore
 checker
 english.pdf
@@ -20,6 +19,7 @@ files/
 temp/
 bin/
 fuzz/
+task.yaml
 
 # vscode internals
 .vscode

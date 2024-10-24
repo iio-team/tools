@@ -23,7 +23,7 @@ mkdir "$name/check"
 mkdir "$name/gen"
 mkdir "$name/sol"
 mkdir "$name/statement"
-sed "s/__TASK_NAME__/$name/g" "$folder/task.yaml" > "$name/task.yaml"
+cp "$folder/task.yaml.orig" "$name/task.yaml.orig"
 cp "$folder/inout.slide" "$name/inout.slide"
 grep -v "brief" "$folder/t.c" > "$name/att/$name.c"
 grep -v "brief" "$folder/t.cpp" > "$name/att/$name.cpp"
@@ -59,5 +59,4 @@ cp "$folder"/{limiti.py,validator.py} "$name/gen/"
 cp "$folder/checker.cpp" "$name/check/"
 chmod a+x "$name/gen/generator.py"
 
-sed -i.bak "s/^tasks:$/tasks:\n- $name/" contest.yaml
-rm contest.yaml.bak
+sed -i "s/^tasks:$/tasks:\n- $name/" contest.yaml

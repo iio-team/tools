@@ -23,6 +23,7 @@
 # Subtask 3: N <= 1000
 #ST: 50
 #STNAME: Nsmall
+#STDEP: NVsmall
 200     1000000 12
 300     1000000 13
 400     1000000 14
@@ -36,6 +37,7 @@
 # Subtask 4: no limits
 #ST: 20
 #STNAME: no-limits
+#STDEP: *
 200     1000000 21
 500     1000000 22
 1000    1000000 23
