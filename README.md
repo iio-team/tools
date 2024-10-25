@@ -27,7 +27,7 @@ You need to edit the file `inout.slide` in your task folder, that the `new_task.
 ```
 make-templates
 ```
-and the tool will prepare all the needed templates.
+and the tool will prepare all the needed templates, and also the input/output description section in the task statement.
 
 ## Task format description
 
