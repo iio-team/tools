@@ -17,7 +17,12 @@ fi
 echo "Press enter to proceed, CTRL-C to quit..."
 read
 
-gh auth login
+if [ "$GITHUB_TOKEN" == "" ]; then
+    echo "No GITHUB_TOKEN, switching to web-based login..."
+    gh auth login
+else
+    echo "Using provided GITHUB_TOKEN: $GITHUB_TOKEN..."
+fi
 gh repo create "iio-team/iiot-$year" --private --team everyone --clone
 cd "iiot-$year"
 git branch -M main
