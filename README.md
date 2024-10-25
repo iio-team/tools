@@ -4,7 +4,7 @@ This repository contains a selection of task development tools, to be used for t
 
 ## Setup
 
-All tools should be used in a unix bash: either Linux, MacOS, or WSL under Windows. Task development requires task maker: a setup guide for it, including documentation of the main features, is available online [here](https://github.com/edomora97/task-maker-rust#readme).
+All tools should be used in a unix bash: either Linux, MacOS, or WSL under Windows. Task development requires task maker: a setup guide for it, including documentation of the main features, is available online [here](https://github.com/olimpiadi-informatica/task-maker-rust#readme).
 
 ## Intended workflow
 
@@ -33,16 +33,16 @@ and the tool will prepare all the needed templates, and also the input/output de
 
 ### Main folder
 
-The main folder only contains the single file `task.yaml`, with general setup information about the task. Some entries are meant to be updated:
+The main folder only contains the single file `task.yaml.orig`, with general setup information about the task. Some entries are meant to be updated:
 
 - `title`, with a meaningful long title
 - `syllabuslevel`, with the actual [syllabus level](https://squadre.olinfo.it/resources/syllabus.pdf) from 1 to 5
 - `memory_limit`, with the wanted memory limit
 - `time_limit`, with the wanted time limit
 
- The other entries are unlikely to be modified.
+The other entries are unlikely to be modified.
 
- ### `att` folder
+### `att` folder
 
 This folder contains files that the contestants can download while browsing the task on CMS. By default those include templates in various languages, and sample input/outputs.
 
@@ -56,7 +56,7 @@ This folder contains the input generation data, split into few files:
 - `limiti.py` with a description of the limits of the various subtasks;
 - `validator.py` with a script that double-checks whether an input is valid;
 - `generator.py` which generates inputs given some command-line parameters;
-- `GEN` which lists the set of parameters to be fed to the generator for each subtask, together with some auxiliary information (subtask score and name).
+- `GEN` which lists the set of parameters to be fed to the generator for each subtask, together with some auxiliary information (subtask score, name and dependencies).
 
 ### `sol` folder
 
