@@ -3,9 +3,6 @@
 \usepackage{pifont,mdframed}
 \usepackage[bottom]{footmisc}
 
-\newcommand{\IIOTsubtask}[3]{\OISubtask{#1}{#2}{#3}}
-\newcommand{\limit}[1]{\limiti{#1}}
-
 \makeatletter
 \gdef\this@inputfilename{input}
 \gdef\this@outputfilename{output}
@@ -44,8 +41,8 @@ The \emph{modulo} operation $(a \bmod m)$ can be written in C/C++/Python as \ver
 
 \Constraints
 \begin{itemize}[nolistsep, itemsep=2mm]
-	\item $1 \le N \le \limit{MAX_N}$.
-	\item $1 \le V_i \le \limit{MAX_V}$ for each $i=0\ldots N-1$.
+	\item $1 \le N \le \constraints{MAXN}$.
+	\item $1 \le V_i \le \constraints{MAXV}$ for each $i=0\ldots N-1$.
 \end{itemize}
 
 \Scoring
@@ -54,9 +51,9 @@ In order to obtain the score of a subtask, your program needs to correctly solve
 
 \IIOTsubtask{0}{1}{Examples.}
 
-\IIOTsubtask{30}{1}{$N \le 10$.}
+\IIOTsubtask{30}{1}{$N \le \stconstraints{MAXN}$.}
 
-\IIOTsubtask{50}{1}{$N \le 100$.}
+\IIOTsubtask{50}{1}{$N \le \stconstraints{MAXN}$.}
 
 \IIOTsubtask{20}{1}{No additional limitations.}
 

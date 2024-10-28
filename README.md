@@ -53,7 +53,7 @@ This folder contains a single source file of a checker, that attributes a score 
 ### `gen` folder
 
 This folder contains the input generation data, split into few files:
-- `limiti.py` with a description of the limits of the various subtasks;
+- `constraints.py` with a description of the limits of the various subtasks;
 - `validator.py` with a script that double-checks whether an input is valid;
 - `generator.py` which generates inputs given some command-line parameters;
 - `GEN` which lists the set of parameters to be fed to the generator for each subtask, together with some auxiliary information (subtask score, name and dependencies).

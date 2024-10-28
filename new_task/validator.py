@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-from limiti import *
+from constraints import *
 
 import sys
 import os

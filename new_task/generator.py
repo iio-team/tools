@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-from limiti import *
+from constraints import *
 from sys import argv, exit, stderr
 import os
 from random import random, randint, choice, sample, shuffle, seed
