@@ -73,6 +73,7 @@ start: {int(start.timestamp())}
 stop: {int(stop.timestamp())}
 token_mode: disabled
 allow_registration: true
+per_user_time: 10800
 timezone: Europe/Rome
 location: Online
 logo: logo.pdf
