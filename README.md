@@ -36,6 +36,8 @@ and the tool will prepare all the needed templates, and also the input/output de
 The main folder only contains the single file `task.yaml.orig`, with general setup information about the task. Some entries are meant to be updated:
 
 - `title`, with a meaningful long title
+- `author`, the author of the task
+- `developer`, the person or people responsible for developing the task
 - `syllabuslevel`, with the actual [syllabus level](https://squadre.olinfo.it/resources/syllabus.pdf) from 1 to 5
 - `memory_limit`, with the wanted memory limit
 - `time_limit`, with the wanted time limit
@@ -69,6 +71,15 @@ This folder contains the task statement. The statement is compiled from a (patch
 task-maker-tools booklet
 ```
 Pictures to be included in the statement should be added here. Beware that in order to enable booklet compilation, pictures should have unique names **across different tasks in a same contest**. It is therefore suggested to name pictures taking inspiration from the task name.
+
+### `editorial` folder
+
+The folder contains the editorial files, compiled from the Latex source `english.tex`. All external resources (like pictures) should be placed in the `editorial` folder or its subfolders.
+To build the editorial for a single task or for the whole contest, use the provided
+```
+build_editorial.sh
+```
+script from the directory of the contest (containing the `contest.yaml` description file).
 
 ## Tool list
 
@@ -104,5 +115,13 @@ If run in an edition repository, it updates the tools folder to the latest versi
 <summary>rename_task.sh</summary>
 
 If run in an task repository, given its current name and a new one, it renames the task.
+
+</details>
+
+<details>
+<summary>build_editorial.sh</summary>
+
+If run from a contest repository, it builds the editorial `editorial.pdf` for a single task (given its name as an argument),
+or for the whole contest (fetching the list of tasks automatically from `contest.yaml`).
 
 </details>
