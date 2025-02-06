@@ -45,7 +45,7 @@ def main(args):
         start = tz.localize(start)
 
     duration = datetime.timedelta(
-        hours=27,
+        hours=30,
         minutes=0,
         seconds=0,
     )
