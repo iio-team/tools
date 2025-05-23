@@ -62,4 +62,13 @@ cp "$folder/checker.cpp" "$name/check/"
 chmod a+x "$name/gen/generator.py"
 cp "$folder/editorial/english.tex" "$name/editorial/"
 
-sed -i "s/^tasks:$/tasks:\n- $name/" contest.yaml
+# append new task name in a way that works on both GNU- and BSD/macOS-sed
+if sed --version >/dev/null 2>&1; then
+  # GNU sed
+  sed -i "s/^tasks:$/tasks:\n- $name/" contest.yaml
+else
+  # BSD/macOS sed
+  sed -i '' "/^tasks:$/a\\
+- $name
+" contest.yaml
+fi
