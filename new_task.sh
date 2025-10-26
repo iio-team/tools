@@ -52,7 +52,6 @@ cat <<EOF > "$name/statement/$name.input1.txt"
 EOF
 echo 42 > "$name/statement/$name.output0.txt"
 echo 42 > "$name/statement/$name.output1.txt"
-ln -s "english.pdf" "$name/statement/statement.pdf"
 ln -s "../../../tools/$fname/logo.pdf" "$name/statement/logo.pdf"
 ln -s "../../../tools/$fname/logo.pdf" "$name/editorial/logo.pdf"
 sed "s/__TASK_NAME__/$name/g" "$folder/generator.py" > "$name/gen/generator.py"

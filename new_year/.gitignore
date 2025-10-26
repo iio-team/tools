@@ -13,7 +13,7 @@ io/
 correttore
 checker
 manager
-english.pdf
+*.pdf
 
 # task-maker build folders
 files/

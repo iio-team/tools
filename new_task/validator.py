@@ -20,7 +20,7 @@ def run(f, st):
 
     V = list(map(int, next(f).split()))
     assert len(V) == N
-    
+
     assert all(0 <= v <= MAXV for v in V)
 
     assert next(f, None) is None

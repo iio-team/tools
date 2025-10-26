@@ -27,7 +27,7 @@ gh repo create "iio-team/iiot-$year" --private --team everyone --clone
 cd "iiot-$year"
 git branch -M main
 sed "s|YYYY|$year|g" "$folder/README.md" > README.md
-cp -r "$folder/.gitignore" "$folder/.github" .
+cp -r "$folder/.gitignore" .
 git add .
 git commit -m "initial commit"
 git push --set-upstream origin main

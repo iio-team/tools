@@ -77,6 +77,13 @@ per_user_time: 10800
 timezone: Europe/Rome
 location: Online
 logo: logo.pdf
+languages:
+- "C++20 / g++"
+- "C11 / gcc"
+- "Java / JDK"
+- "Python 3 / pypy3"
+- "Pascal / fpc"
+- "C# / Mono"
 
 tasks:
 
