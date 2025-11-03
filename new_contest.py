@@ -73,6 +73,7 @@ start: {int(start.timestamp())}
 stop: {int(stop.timestamp())}
 token_mode: disabled
 allow_registration: true
+allow_user_tests: false
 per_user_time: 10800
 timezone: Europe/Rome
 location: Online
@@ -81,7 +82,7 @@ languages:
 - "C++20 / g++"
 - "C11 / gcc"
 - "Java / JDK"
-- "Python 3 / pypy3"
+- "Python 3 / PyPy"
 - "Pascal / fpc"
 - "C# / Mono"
 
