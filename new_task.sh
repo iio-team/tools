@@ -5,7 +5,7 @@ if [ "$1" == "" ]; then
     exit 0
 fi
 
-name=$1
+name=$(echo "$1" | tr '[:upper:]' '[:lower:]')
 folder=`realpath "${0%.sh}"`
 fname=`basename "$0" .sh`
 
